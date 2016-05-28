@@ -8,33 +8,37 @@
 
 import UIKit
 
-class FrontViewController: UIViewController {
+class FrontViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: slugs[row])
+        
         let leftButtonItem = UIBarButtonItem.init(title: "Menu", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
         self.navigationItem.leftBarButtonItem = leftButtonItem
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.navigationItem.title = menus[0]
+        
+        print("frontViewController View Did Load")
+    }
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrCountrys[0].count
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cellIdentifier = slugs[0]
+        
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+        
+        cell.textLabel?.text = arrCountrys[0][indexPath.row].name
+        
+        return cell
+    }
 }

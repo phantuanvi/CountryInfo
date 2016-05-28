@@ -8,19 +8,100 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
+
+var arrCountrys = [[Country]()]
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var arrJSON: JSON!
+    let frontViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
 
+    func getDataJsonFromLink() {
+        Alamofire.request(.GET, "http://www.peacecorps.gov/api/v1/geography/countries").responseJSON { response in
+            switch response.result {
+            case .Success:
+                
+                if let value = response.result.value {
+                    self.arrJSON = JSON(value)
+                }
+                print(self.arrJSON)
+                
+            case .Failure(let error):
+                print(error.description)
+            }
+            self.parseJson()
+        }
+    }
+    
+    func parseJson() {
+        
+        var arrCountry0 = [Country]()
+        var arrCountry1 = [Country]()
+        var arrCountry2 = [Country]()
+        var arrCountry3 = [Country]()
+        var arrCountry4 = [Country]()
+        var arrCountry5 = [Country]()
+        var arrCountry6 = [Country]()
+        var arrCountry7 = [Country]()
+        
+        for i in 0..<134 {
+            var dict = arrJSON[i]
+            
+            let country = Country()
+            country.name = dict["name"].stringValue
+            country.flag = dict["flag_image"].stringValue
+            country.population = dict["population"].stringValue
+            country.region = dict["region"].stringValue
+            
+            switch country.region {
+            case "africa":
+                arrCountry0.append(country)
+            case "asia":
+                arrCountry1.append(country)
+            case "centralamerica":
+                arrCountry2.append(country)
+            case "easteurope":
+                arrCountry3.append(country)
+            case "northafr":
+                arrCountry4.append(country)
+            case "pacificislands":
+                arrCountry5.append(country)
+            case "southamerica":
+                arrCountry6.append(country)
+            case "caribbean":
+                arrCountry7.append(country)
+            default:
+                arrCountry0.append(country)
+            }
+        }
+        
+        arrCountrys[0] = arrCountry0
+        arrCountrys.append(arrCountry1)
+        arrCountrys.append(arrCountry2)
+        arrCountrys.append(arrCountry3)
+        arrCountrys.append(arrCountry4)
+        arrCountrys.append(arrCountry5)
+        arrCountrys.append(arrCountry6)
+        arrCountrys.append(arrCountry7)
+        
+        print("parse json done !, arrCountrys: \(arrCountrys.count)")
+        
+        frontViewController.tableView.reloadData()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
+        getDataJsonFromLink()
         
-        let frontViewController = FrontViewController()
+        
         let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
         
         let frontNavigationController = UINavigationController.init(rootViewController: frontViewController)

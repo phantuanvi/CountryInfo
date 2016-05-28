@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RearViewController" customModule="CountryInfo" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="duA-OT-1TV" id="nxY-Cl-fsI"/>
+                <outlet property="tableView" destination="3V3-nQ-rRR" id="RxJ-9m-eOa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,17 +16,17 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="duA-OT-1TV">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3V3-nQ-rRR">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="duA-OT-1TV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KhF-Cm-dvG"/>
-                <constraint firstAttribute="trailing" secondItem="duA-OT-1TV" secondAttribute="trailing" id="PUG-66-KTM"/>
-                <constraint firstItem="duA-OT-1TV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bcU-Wn-N81"/>
-                <constraint firstAttribute="bottom" secondItem="duA-OT-1TV" secondAttribute="bottom" id="tBL-cJ-hfw"/>
+                <constraint firstAttribute="bottom" secondItem="3V3-nQ-rRR" secondAttribute="bottom" id="8iB-XE-i5W"/>
+                <constraint firstItem="3V3-nQ-rRR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bze-nX-Ib6"/>
+                <constraint firstAttribute="trailing" secondItem="3V3-nQ-rRR" secondAttribute="trailing" id="WRO-QE-O9C"/>
+                <constraint firstItem="3V3-nQ-rRR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="v0A-nh-JaL"/>
             </constraints>
         </view>
     </objects>
