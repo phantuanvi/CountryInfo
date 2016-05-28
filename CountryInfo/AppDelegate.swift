@@ -17,6 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
+        
+        let frontViewController = FrontViewController()
+        let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
+        
+        let frontNavigationController = UINavigationController.init(rootViewController: frontViewController)
+        let rearNavigationController = UINavigationController.init(rootViewController: rearViewController)
+        
+        let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
+        
+        self.window?.rootViewController = revealController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

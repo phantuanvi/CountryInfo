@@ -8,22 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		0CD14B761CF939550071783B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B751CF939550071783B /* AppDelegate.swift */; };
-		0CD14B781CF939550071783B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B771CF939550071783B /* ViewController.swift */; };
-		0CD14B7B1CF939550071783B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B791CF939550071783B /* Main.storyboard */; };
 		0CD14B7E1CF939550071783B /* CountryInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B7C1CF939550071783B /* CountryInfo.xcdatamodeld */; };
 		0CD14B801CF939560071783B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B7F1CF939560071783B /* Assets.xcassets */; };
 		0CD14B831CF939560071783B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B811CF939560071783B /* LaunchScreen.storyboard */; };
+		0CD14B8F1CF939A30071783B /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B8E1CF939A30071783B /* SWRevealViewController.m */; };
+		0CD14B9E1CF93DC10071783B /* FrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B9C1CF93DC10071783B /* FrontViewController.swift */; };
+		0CD14B9F1CF93DC10071783B /* FrontViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B9D1CF93DC10071783B /* FrontViewController.xib */; };
+		0CD14BA21CF93F840071783B /* RearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14BA01CF93F840071783B /* RearViewController.swift */; };
+		0CD14BA31CF93F840071783B /* RearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14BA11CF93F840071783B /* RearViewController.xib */; };
+		0CD14BA71CF940290071783B /* CountryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14BA51CF940290071783B /* CountryTableViewController.swift */; };
+		0CD14BA81CF940290071783B /* CountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14BA61CF940290071783B /* CountryTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0CD14B721CF939550071783B /* CountryInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountryInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CD14B751CF939550071783B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0CD14B771CF939550071783B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0CD14B7A1CF939550071783B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0CD14B7D1CF939550071783B /* CountryInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CountryInfo.xcdatamodel; sourceTree = "<group>"; };
 		0CD14B7F1CF939560071783B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CD14B821CF939560071783B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CD14B841CF939560071783B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CD14B8C1CF939A20071783B /* CountryInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CountryInfo-Bridging-Header.h"; sourceTree = "<group>"; };
+		0CD14B8D1CF939A30071783B /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		0CD14B8E1CF939A30071783B /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		0CD14B9C1CF93DC10071783B /* FrontViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontViewController.swift; sourceTree = "<group>"; };
+		0CD14B9D1CF93DC10071783B /* FrontViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontViewController.xib; sourceTree = "<group>"; };
+		0CD14BA01CF93F840071783B /* RearViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RearViewController.swift; sourceTree = "<group>"; };
+		0CD14BA11CF93F840071783B /* RearViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RearViewController.xib; sourceTree = "<group>"; };
+		0CD14BA51CF940290071783B /* CountryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryTableViewController.swift; sourceTree = "<group>"; };
+		0CD14BA61CF940290071783B /* CountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +69,61 @@
 			isa = PBXGroup;
 			children = (
 				0CD14B751CF939550071783B /* AppDelegate.swift */,
-				0CD14B771CF939550071783B /* ViewController.swift */,
-				0CD14B791CF939550071783B /* Main.storyboard */,
+				0CD14B951CF93A2E0071783B /* FrontViewController */,
+				0CD14B921CF939CE0071783B /* RearViewController */,
+				0CD14BA41CF93FFD0071783B /* CountryTableViewController */,
+				0CD14B901CF939BB0071783B /* Model */,
+				0CD14B8B1CF9398C0071783B /* Supporting Files */,
+			);
+			path = CountryInfo;
+			sourceTree = "<group>";
+		};
+		0CD14B8B1CF9398C0071783B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				0CD14B7F1CF939560071783B /* Assets.xcassets */,
 				0CD14B811CF939560071783B /* LaunchScreen.storyboard */,
 				0CD14B841CF939560071783B /* Info.plist */,
+				0CD14B8D1CF939A30071783B /* SWRevealViewController.h */,
+				0CD14B8E1CF939A30071783B /* SWRevealViewController.m */,
+				0CD14B8C1CF939A20071783B /* CountryInfo-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0CD14B901CF939BB0071783B /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				0CD14B7C1CF939550071783B /* CountryInfo.xcdatamodeld */,
 			);
-			path = CountryInfo;
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0CD14B921CF939CE0071783B /* RearViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0CD14BA01CF93F840071783B /* RearViewController.swift */,
+				0CD14BA11CF93F840071783B /* RearViewController.xib */,
+			);
+			name = RearViewController;
+			sourceTree = "<group>";
+		};
+		0CD14B951CF93A2E0071783B /* FrontViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0CD14B9C1CF93DC10071783B /* FrontViewController.swift */,
+				0CD14B9D1CF93DC10071783B /* FrontViewController.xib */,
+			);
+			name = FrontViewController;
+			sourceTree = "<group>";
+		};
+		0CD14BA41CF93FFD0071783B /* CountryTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0CD14BA51CF940290071783B /* CountryTableViewController.swift */,
+				0CD14BA61CF940290071783B /* CountryTableViewController.xib */,
+			);
+			name = CountryTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,9 +185,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CD14BA31CF93F840071783B /* RearViewController.xib in Resources */,
+				0CD14BA81CF940290071783B /* CountryTableViewController.xib in Resources */,
+				0CD14B9F1CF93DC10071783B /* FrontViewController.xib in Resources */,
 				0CD14B831CF939560071783B /* LaunchScreen.storyboard in Resources */,
 				0CD14B801CF939560071783B /* Assets.xcassets in Resources */,
-				0CD14B7B1CF939550071783B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,23 +200,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CD14B781CF939550071783B /* ViewController.swift in Sources */,
+				0CD14BA21CF93F840071783B /* RearViewController.swift in Sources */,
+				0CD14B9E1CF93DC10071783B /* FrontViewController.swift in Sources */,
 				0CD14B761CF939550071783B /* AppDelegate.swift in Sources */,
 				0CD14B7E1CF939550071783B /* CountryInfo.xcdatamodeld in Sources */,
+				0CD14B8F1CF939A30071783B /* SWRevealViewController.m in Sources */,
+				0CD14BA71CF940290071783B /* CountryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0CD14B791CF939550071783B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0CD14B7A1CF939550071783B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0CD14B811CF939560071783B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -254,10 +310,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CountryInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuanvi.CountryInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CountryInfo/CountryInfo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -265,10 +324,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CountryInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuanvi.CountryInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CountryInfo/CountryInfo-Bridging-Header.h";
 			};
 			name = Release;
 		};
