@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 
 class CountryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: slugs[row])
+        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: slugs[row])
         
         self.navigationItem.title = menus[row]
         let leftButtonItem = UIBarButtonItem.init(title: "Menu", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
@@ -37,11 +38,31 @@ class CountryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = slugs[row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CountryCell
 
         // Configure the cell...
-        cell.textLabel?.text = arrCountrys[row][indexPath.row].name
+        //cell.textLabel?.text = arrCountrys[row][indexPath.row].name
+        let country = arrCountrys[row][indexPath.row]
+        
+        var img: UIImage?
+        if let url = country.flagUrl {
+            img = FrontViewController.imageCache.objectForKey(url) as? UIImage
+        }
+        cell.configureCell(country, img: img)
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let country = arrCountrys[row][indexPath.row]
+        let countryName = country.name.replace(" ", replacement: "%20")
+        let link = "https://en.wikipedia.org/wiki/\(countryName)"
+        print(link)
+        let svc = SFSafariViewController(URL: NSURL(string: link)!)
+        self.presentViewController(svc, animated: true, completion: nil)
     }
 }

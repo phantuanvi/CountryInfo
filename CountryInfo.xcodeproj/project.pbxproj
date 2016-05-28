@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CAB2E351CF9D9EF0010046A /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB2E331CF9D9EF0010046A /* CountryCell.swift */; };
+		0CAB2E361CF9D9EF0010046A /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CAB2E341CF9D9EF0010046A /* CountryCell.xib */; };
 		0CB365761CF98BF200315104 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB365751CF98BF100315104 /* Country.swift */; };
 		0CB365791CF9C56300315104 /* FrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB365771CF9C56300315104 /* FrontViewController.swift */; };
 		0CB3657A1CF9C56300315104 /* FrontViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB365781CF9C56300315104 /* FrontViewController.xib */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		0B1DD60A94A53436E4A84AB9 /* Pods-CountryInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInfo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CountryInfo/Pods-CountryInfo.debug.xcconfig"; sourceTree = "<group>"; };
+		0CAB2E331CF9D9EF0010046A /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		0CAB2E341CF9D9EF0010046A /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
 		0CB365751CF98BF100315104 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		0CB365771CF9C56300315104 /* FrontViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontViewController.swift; sourceTree = "<group>"; };
 		0CB365781CF9C56300315104 /* FrontViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontViewController.xib; sourceTree = "<group>"; };
@@ -56,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CAB2E321CF9D9160010046A /* CountryCell */ = {
+			isa = PBXGroup;
+			children = (
+				0CAB2E331CF9D9EF0010046A /* CountryCell.swift */,
+				0CAB2E341CF9D9EF0010046A /* CountryCell.xib */,
+			);
+			path = CountryCell;
+			sourceTree = "<group>";
+		};
 		0CD14B691CF939550071783B = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +90,7 @@
 		0CD14B741CF939550071783B /* CountryInfo */ = {
 			isa = PBXGroup;
 			children = (
+				0CAB2E321CF9D9160010046A /* CountryCell */,
 				0CD14BA41CF93FFD0071783B /* CountryTableViewController */,
 				0CD14B951CF93A2E0071783B /* FrontViewController */,
 				0CD14B901CF939BB0071783B /* Model */,
@@ -215,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CAB2E361CF9D9EF0010046A /* CountryCell.xib in Resources */,
 				0CD14BA81CF940290071783B /* CountryTableViewController.xib in Resources */,
 				0CB3657A1CF9C56300315104 /* FrontViewController.xib in Resources */,
 				0CB3657E1CF9C61700315104 /* RearViewController.xib in Resources */,
@@ -278,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CAB2E351CF9D9EF0010046A /* CountryCell.swift in Sources */,
 				0CB3657D1CF9C61700315104 /* RearViewController.swift in Sources */,
 				0CB365761CF98BF200315104 /* Country.swift in Sources */,
 				0CB365791CF9C56300315104 /* FrontViewController.swift in Sources */,

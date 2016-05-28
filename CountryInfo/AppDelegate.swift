@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let country = Country()
             country.name = dict["name"].stringValue
-            country.flag = dict["flag_image"].stringValue
+            country.flagUrl = dict["flag_image"].stringValue
             country.population = dict["population"].stringValue
             country.region = dict["region"].stringValue
             
