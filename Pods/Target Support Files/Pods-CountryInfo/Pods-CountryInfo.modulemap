@@ -1,0 +1,6 @@
+framework module Pods_CountryInfo {
+  umbrella header "Pods-CountryInfo-umbrella.h"
+
+  export *
+  module * { export * }
+}
