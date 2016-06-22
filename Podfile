@@ -7,5 +7,7 @@ target 'CountryInfo' do
 
   # Pods for CountryInfo
 pod 'Alamofire'
+pod 'Kingfisher'
 pod 'SwiftyJSON'
+pod 'SVProgressHUD'
 end

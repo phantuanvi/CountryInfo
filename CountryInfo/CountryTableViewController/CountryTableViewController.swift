@@ -14,7 +14,7 @@ class CountryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: slugs[row])
+        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: menus[row])
         
         self.navigationItem.title = menus[row]
         let leftButtonItem = UIBarButtonItem.init(title: "Menu", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
@@ -37,18 +37,14 @@ class CountryTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellIdentifier = slugs[row]
+        let cellIdentifier = menus[row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CountryCell
 
         // Configure the cell...
-        //cell.textLabel?.text = arrCountrys[row][indexPath.row].name
+        
         let country = arrCountrys[row][indexPath.row]
         
-        var img: UIImage?
-        if let url = country.flagUrl {
-            img = FrontViewController.imageCache.objectForKey(url) as? UIImage
-        }
-        cell.configureCell(country, img: img)
+        cell.configureCell(country)
 
         return cell
     }

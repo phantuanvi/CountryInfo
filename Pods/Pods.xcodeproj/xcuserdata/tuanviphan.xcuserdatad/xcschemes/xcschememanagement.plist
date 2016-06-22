@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CountryInfo.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2E7CAB6777F52659C6426ABA92599F31</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>46008E35D8C6EF64F7494BCE3BE9A7D2</key>
+		<key>56F9BF22CC20F75B7CE29E69332C1B22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B08481E6B11E75D31E1E0741CECBF56E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E96E13C4D3B5B5FC0651440734C2BF4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0CC2FF9DB6DBDBF8A6F04573609023C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

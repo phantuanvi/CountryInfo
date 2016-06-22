@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Alamofire
 import SwiftyJSON
+import SVProgressHUD
 
 var arrCountrys = [[Country]()]
 
@@ -23,20 +24,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let frontViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
 
     func getDataJsonFromLink() {
-        Alamofire.request(.GET, "http://www.peacecorps.gov/api/v1/geography/countries").responseJSON { response in
-            switch response.result {
-            case .Success:
-                
-                if let value = response.result.value {
-                    self.arrJSON = JSON(value)
+        
+        if Reachability.isConnectedToNetwork() == true {
+            SVProgressHUD.show()
+            
+            Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
+                switch response.result {
+                case .Success:
+                    
+                    if let value = response.result.value {
+                        self.arrJSON = JSON(value)
+                    }
+                    self.parseJson()
+                    
+                case .Failure(let error):
+                    print(error.description)
                 }
-                print(self.arrJSON)
-                
-            case .Failure(let error):
-                print(error.description)
             }
-            self.parseJson()
         }
+        
     }
     
     func parseJson() {
@@ -46,36 +52,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var arrCountry2 = [Country]()
         var arrCountry3 = [Country]()
         var arrCountry4 = [Country]()
-        var arrCountry5 = [Country]()
-        var arrCountry6 = [Country]()
-        var arrCountry7 = [Country]()
         
-        for i in 0..<134 {
+        for i in 0..<arrJSON.count {
             var dict = arrJSON[i]
             
             let country = Country()
             country.name = dict["name"].stringValue
-            country.flagUrl = dict["flag_image"].stringValue
+            country.alpha2Code = dict["alpha2Code"].stringValue.lowercaseString
             country.population = dict["population"].stringValue
+            country.area = dict["area"].stringValue
             country.region = dict["region"].stringValue
             
             switch country.region {
-            case "africa":
+            case "Africa":
                 arrCountry0.append(country)
-            case "asia":
+            case "Asia":
                 arrCountry1.append(country)
-            case "centralamerica":
+            case "Europe":
                 arrCountry2.append(country)
-            case "easteurope":
+            case "Oceania":
                 arrCountry3.append(country)
-            case "northafr":
+            case "Americas":
                 arrCountry4.append(country)
-            case "pacificislands":
-                arrCountry5.append(country)
-            case "southamerica":
-                arrCountry6.append(country)
-            case "caribbean":
-                arrCountry7.append(country)
+            
             default:
                 arrCountry0.append(country)
             }
@@ -86,12 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         arrCountrys.append(arrCountry2)
         arrCountrys.append(arrCountry3)
         arrCountrys.append(arrCountry4)
-        arrCountrys.append(arrCountry5)
-        arrCountrys.append(arrCountry6)
-        arrCountrys.append(arrCountry7)
         
         print("parse json done !, arrCountrys: \(arrCountrys.count)")
         
+        SVProgressHUD.showSuccessWithStatus("Complete")
         frontViewController.tableView.reloadData()
     }
 
@@ -99,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
-        getDataJsonFromLink()
         
+        getDataJsonFromLink()
         
         let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
         

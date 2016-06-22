@@ -8,43 +8,43 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 class CountryCell: UITableViewCell {
     
-    @IBOutlet weak var flag: UIImageView!
+    @IBOutlet weak var flagImg: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var population: UILabel!
+    @IBOutlet weak var area: UILabel!
     
-    static var imageCache = NSCache()
     
-    func configureCell(country: Country, img: UIImage?) {
+    
+    func configureCell(country: Country) {
         self.name.text = country.name
         self.population.text = country.population
-        //        if let url = NSURL(string: country.flag), let data = NSData(contentsOfURL: url) {
-        //            cell.flag.image = UIImage(data: data)
-        //        }
+        self.area.text = country.area
+//        self.flagImg.image = UIImage(
         
-        Alamofire.request(.GET, country.flagUrl).validate(contentType: ["*/flags/*"]).response { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
-            
-            if error == nil {
-                let img = UIImage(data: data!)!
-                self.flag.image = img
-                FrontViewController.imageCache.setObject(img, forKey: country.flagUrl)
-            } else {
-                print(error.debugDescription)
-            }
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+        
+        //let URLRequest = NSURLRequest(URL: NSURL(string: "https://github.com/hjnilsson/country-flags/blob/master/png250px/\(country.alpha2Code).png")!)
+        
+//        Alamofire.request(.GET, "https://github.com/hjnilsson/country-flags/blob/master/png250px/\(country.alpha2Code).png")
+//            .responseImage { response in
+//                debugPrint(response)
+//                
+//                print(response.request)
+//                print(response.response)
+//                debugPrint(response.result)
+//                
+//                if let image = response.result.value {
+//                    print("image downloaded: \(image)")
+//                    self.flagImg.image = image
+//                }
+//        }
+        
+        let url = NSURL(string:"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/\(country.alpha2Code).png")!
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.flagImg.kf_setImageWithURL(url, placeholderImage: nil)
     }
     
 }

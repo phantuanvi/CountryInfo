@@ -9,7 +9,8 @@
 class Country {
     
     var name: String!
-    var flagUrl: String!
+    var alpha2Code: String!
     var population: String!
+    var area: String!
     var region: String!
 }
