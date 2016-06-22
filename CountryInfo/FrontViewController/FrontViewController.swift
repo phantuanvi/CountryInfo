@@ -110,44 +110,47 @@ class FrontViewController: UITableViewController {
     
     func parseJson() {
         
-        var arrCountry0 = [Country]()
-        var arrCountry1 = [Country]()
-        var arrCountry2 = [Country]()
-        var arrCountry3 = [Country]()
-        var arrCountry4 = [Country]()
+//        var arrCountry0 = [Country]()
+//        var arrCountry1 = [Country]()
+//        var arrCountry2 = [Country]()
+//        var arrCountry3 = [Country]()
+//        var arrCountry4 = [Country]()
         
         for i in 0..<arrJSON.count {
             var dict = arrJSON[i]
             
             let country = Country()
             country.name = dict["name"].stringValue
-            country.alpha2Code = dict["alpha2Code"].stringValue.lowercaseString
+            
+            let alphaCode = dict["alpha2Code"].stringValue.lowercaseString
+            country.alpha2Code = alphaCode
             country.population = dict["population"].stringValue
             country.area = dict["area"].stringValue
             country.region = dict["region"].stringValue
+            country.flagUrl = "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/\(alphaCode).png"
             
-            switch country.region {
-            case "Africa":
-                arrCountry0.append(country)
-            case "Asia":
-                arrCountry1.append(country)
-            case "Europe":
-                arrCountry2.append(country)
-            case "Oceania":
-                arrCountry3.append(country)
-            case "Americas":
-                arrCountry4.append(country)
-                
-            default:
-                arrCountry0.append(country)
-            }
+//            switch country.region {
+//            case "Africa":
+//                arrCountry0.append(country)
+//            case "Asia":
+//                arrCountry1.append(country)
+//            case "Europe":
+//                arrCountry2.append(country)
+//            case "Oceania":
+//                arrCountry3.append(country)
+//            case "Americas":
+//                arrCountry4.append(country)
+//                
+//            default:
+//                arrCountry0.append(country)
+//            }
         }
         
-        arrCountrys[0] = arrCountry0
-        arrCountrys.append(arrCountry1)
-        arrCountrys.append(arrCountry2)
-        arrCountrys.append(arrCountry3)
-        arrCountrys.append(arrCountry4)
+//        arrCountrys[0] = arrCountry0
+//        arrCountrys.append(arrCountry1)
+//        arrCountrys.append(arrCountry2)
+//        arrCountrys.append(arrCountry3)
+//        arrCountrys.append(arrCountry4)
         
         print("parse json done !, arrCountrys: \(arrCountrys.count)")
         
