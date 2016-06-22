@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getDataJsonFromLink() {
         
         if Reachability.isConnectedToNetwork() == true {
-            SVProgressHUD.show()
+            SVProgressHUD.showWithStatus("Please wait!")
             
             Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
                 switch response.result {
@@ -89,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("parse json done !, arrCountrys: \(arrCountrys.count)")
         
         SVProgressHUD.showSuccessWithStatus("Complete")
+        SVProgressHUD.dismissWithDelay(0.5)
         frontViewController.tableView.reloadData()
     }
 
