@@ -51,6 +51,7 @@ class FrontViewController: UITableViewController {
         let country = arrCountrys[0][indexPath.row]
         
         cell.configureCell(country)
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
     }

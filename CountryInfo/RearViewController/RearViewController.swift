@@ -41,6 +41,8 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellIdentifier = menus[row]
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+        cell.backgroundColor = UIColor.clearColor()
+        
         if Reachability.isConnectedToNetwork() == true {
         
             cell.textLabel?.text = menus[indexPath.row]
@@ -51,21 +53,20 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if Reachability.isConnectedToNetwork() == true {
-            var nextViewController: UIViewController!
+        var nextViewController: UIViewController!
+        
+        if indexPath.row == 0 {
             
-            if indexPath.row == 0 {
-                
-                nextViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
-                
-            } else {
-                
-                nextViewController = CountryTableViewController(nibName: "CountryTableViewController", bundle: nil)
-            }
+            nextViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
             
-            let navigationController = UINavigationController.init(rootViewController: nextViewController)
-            self.revealViewController().pushFrontViewController(navigationController, animated: true)
+        } else {
+            
+            nextViewController = CountryTableViewController(nibName: "CountryTableViewController", bundle: nil)
         }
+        
+        let navigationController = UINavigationController.init(rootViewController: nextViewController)
+        self.revealViewController().pushFrontViewController(navigationController, animated: true)
+        
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {

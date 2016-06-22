@@ -45,6 +45,7 @@ class CountryTableViewController: UITableViewController {
         let country = arrCountrys[row][indexPath.row]
         
         cell.configureCell(country)
+        cell.backgroundColor = UIColor.clearColor()
 
         return cell
     }
