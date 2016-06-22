@@ -17,33 +17,14 @@ class CountryCell: UITableViewCell {
     @IBOutlet weak var population: UILabel!
     @IBOutlet weak var area: UILabel!
     
-    
-    
     func configureCell(country: Country) {
         self.name.text = country.name
         self.population.text = country.population
         self.area.text = country.area
-//        self.flagImg.image = UIImage(
-        
-        
-        //let URLRequest = NSURLRequest(URL: NSURL(string: "https://github.com/hjnilsson/country-flags/blob/master/png250px/\(country.alpha2Code).png")!)
-        
-//        Alamofire.request(.GET, "https://github.com/hjnilsson/country-flags/blob/master/png250px/\(country.alpha2Code).png")
-//            .responseImage { response in
-//                debugPrint(response)
-//                
-//                print(response.request)
-//                print(response.response)
-//                debugPrint(response.result)
-//                
-//                if let image = response.result.value {
-//                    print("image downloaded: \(image)")
-//                    self.flagImg.image = image
-//                }
-//        }
         
         let url = NSURL(string:"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/\(country.alpha2Code).png")!
 
+        print(url)
         self.flagImg.kf_setImageWithURL(url, placeholderImage: nil)
     }
     
