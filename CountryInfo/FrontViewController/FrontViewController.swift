@@ -8,12 +8,22 @@
 
 import UIKit
 import SafariServices
+import Alamofire
+import SwiftyJSON
 import SVProgressHUD
 
 class FrontViewController: UITableViewController {
     
+    var arrJSON: JSON!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("frontViewController View Did Load")
+        if firstTime {
+            getDataFromLink()
+            firstTime = false
+        }
         
         tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: menus[0])
         
@@ -23,7 +33,7 @@ class FrontViewController: UITableViewController {
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.navigationItem.title = menus[0]
         
-        print("frontViewController View Did Load")
+       
         
         if (Reachability.isConnectedToNetwork() == false) {
             let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -72,12 +82,79 @@ class FrontViewController: UITableViewController {
         print(link)
         let svc = SFSafariViewController(URL: NSURL(string: link)!)
         self.presentViewController(svc, animated: true, completion: nil)
-        
+
         
     }
     
-
+    func getDataFromLink() {
+        
+        if Reachability.isConnectedToNetwork() == true {
+            SVProgressHUD.showWithStatus("Please wait!")
+            
+            Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
+                switch response.result {
+                case .Success:
+                    
+                    if let value = response.result.value {
+                        self.arrJSON = JSON(value)
+                    }
+                    self.parseJson()
+                    
+                case .Failure(let error):
+                    print(error.description)
+                }
+            }
+        }
+        
+    }
     
+    func parseJson() {
+        
+        var arrCountry0 = [Country]()
+        var arrCountry1 = [Country]()
+        var arrCountry2 = [Country]()
+        var arrCountry3 = [Country]()
+        var arrCountry4 = [Country]()
+        
+        for i in 0..<arrJSON.count {
+            var dict = arrJSON[i]
+            
+            let country = Country()
+            country.name = dict["name"].stringValue
+            country.alpha2Code = dict["alpha2Code"].stringValue.lowercaseString
+            country.population = dict["population"].stringValue
+            country.area = dict["area"].stringValue
+            country.region = dict["region"].stringValue
+            
+            switch country.region {
+            case "Africa":
+                arrCountry0.append(country)
+            case "Asia":
+                arrCountry1.append(country)
+            case "Europe":
+                arrCountry2.append(country)
+            case "Oceania":
+                arrCountry3.append(country)
+            case "Americas":
+                arrCountry4.append(country)
+                
+            default:
+                arrCountry0.append(country)
+            }
+        }
+        
+        arrCountrys[0] = arrCountry0
+        arrCountrys.append(arrCountry1)
+        arrCountrys.append(arrCountry2)
+        arrCountrys.append(arrCountry3)
+        arrCountrys.append(arrCountry4)
+        
+        print("parse json done !, arrCountrys: \(arrCountrys.count)")
+        
+        SVProgressHUD.showSuccessWithStatus("Complete")
+        SVProgressHUD.dismissWithDelay(0.5)
+        self.tableView.reloadData()
+    }    
 }
 
 extension String {

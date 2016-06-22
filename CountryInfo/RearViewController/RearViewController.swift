@@ -24,6 +24,14 @@ class RearViewController: UIViewController {
         tableView.alwaysBounceVertical = false;
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: menus[row])
         
+        print("RearViewController did load")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        if (Reachability.isConnectedToNetwork() == false) {
+            tableView.allowsSelection = false
+        }
     }
     
 }

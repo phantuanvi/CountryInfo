@@ -8,11 +8,10 @@
 
 import UIKit
 import CoreData
-import Alamofire
-import SwiftyJSON
-import SVProgressHUD
+
 
 var arrCountrys = [[Country]()]
+var firstTime = true
 
 @UIApplicationMain
 
@@ -20,89 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var arrJSON: JSON!
-    let frontViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
-
-    func getDataJsonFromLink() {
-        
-        if Reachability.isConnectedToNetwork() == true {
-            SVProgressHUD.showWithStatus("Please wait!")
-            
-            Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
-                switch response.result {
-                case .Success:
-                    
-                    if let value = response.result.value {
-                        self.arrJSON = JSON(value)
-                    }
-                    self.parseJson()
-                    
-                case .Failure(let error):
-                    print(error.description)
-                }
-            }
-        }
-        
-    }
-    
-    func parseJson() {
-        
-        var arrCountry0 = [Country]()
-        var arrCountry1 = [Country]()
-        var arrCountry2 = [Country]()
-        var arrCountry3 = [Country]()
-        var arrCountry4 = [Country]()
-        
-        for i in 0..<arrJSON.count {
-            var dict = arrJSON[i]
-            
-            let country = Country()
-            country.name = dict["name"].stringValue
-            country.alpha2Code = dict["alpha2Code"].stringValue.lowercaseString
-            country.population = dict["population"].stringValue
-            country.area = dict["area"].stringValue
-            country.region = dict["region"].stringValue
-            
-            switch country.region {
-            case "Africa":
-                arrCountry0.append(country)
-            case "Asia":
-                arrCountry1.append(country)
-            case "Europe":
-                arrCountry2.append(country)
-            case "Oceania":
-                arrCountry3.append(country)
-            case "Americas":
-                arrCountry4.append(country)
-            
-            default:
-                arrCountry0.append(country)
-            }
-        }
-        
-        arrCountrys[0] = arrCountry0
-        arrCountrys.append(arrCountry1)
-        arrCountrys.append(arrCountry2)
-        arrCountrys.append(arrCountry3)
-        arrCountrys.append(arrCountry4)
-        
-        print("parse json done !, arrCountrys: \(arrCountrys.count)")
-        
-        SVProgressHUD.showSuccessWithStatus("Complete")
-        SVProgressHUD.dismissWithDelay(0.5)
-        frontViewController.tableView.reloadData()
-    }
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         
-        getDataJsonFromLink()
-        
         let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
         
+        let frontViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
         let frontNavigationController = UINavigationController.init(rootViewController: frontViewController)
+        
         let rearNavigationController = UINavigationController.init(rootViewController: rearViewController)
         
         let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
