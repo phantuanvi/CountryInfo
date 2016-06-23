@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
+import CoreData
 
 class CountryCell: UITableViewCell {
     
@@ -17,12 +18,14 @@ class CountryCell: UITableViewCell {
     @IBOutlet weak var population: UILabel!
     @IBOutlet weak var area: UILabel!
     
-    func configureCell(country: Country) {
-        self.name.text = country.name
-        self.population.text = country.population
-        self.area.text = country.area
+    func configureCell(country: NSManagedObject) {
+        self.name.text = country.valueForKey("name") as? String
+        self.population.text = country.valueForKey("population") as? String
+        let areaString = country.valueForKey("area") as! String
+        self.area.text = "\(areaString) \u{33A2}"
         
-        let url = NSURL(string:"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/\(country.alpha2Code).png")!
+        let urlString = country.valueForKey("flagUrl") as! String
+        let url = NSURL(string: urlString)!
 
         print(url)
         self.flagImg.kf_setImageWithURL(url, placeholderImage: nil)

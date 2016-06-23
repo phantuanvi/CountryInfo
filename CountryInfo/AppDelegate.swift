@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-
-var arrCountrys = [[Country]()]
-var firstTime = true
-
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,14 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         
-        let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
-        
         let frontViewController = FrontViewController(nibName: "FrontViewController", bundle: nil)
         let frontNavigationController = UINavigationController.init(rootViewController: frontViewController)
-        
+        let rearViewController = RearViewController(nibName: "RearViewController", bundle: nil)
         let rearNavigationController = UINavigationController.init(rootViewController: rearViewController)
         
         let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
+        
+        let standardDefaults = NSUserDefaults.standardUserDefaults()
+        let appDefaults = ["FirstTime": true]
+        standardDefaults.registerDefaults(appDefaults)
         
         self.window?.rootViewController = revealController
         self.window?.makeKeyAndVisible()

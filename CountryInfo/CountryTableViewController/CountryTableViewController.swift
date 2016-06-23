@@ -8,11 +8,26 @@
 
 import UIKit
 import SafariServices
+import CoreData
 
 class CountryTableViewController: UITableViewController {
     
+    var countrys = [NSManagedObject]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let standardDefaults = NSUserDefaults.standardUserDefaults()
+        let firstTime = standardDefaults.boolForKey("FirstTime")
+        
+        if firstTime {
+            if (Reachability.isConnectedToNetwork() == false) {
+                let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
+                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(action)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
 
         tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: menus[row])
         
@@ -21,6 +36,28 @@ class CountryTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = leftButtonItem
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Country")
+        
+        // Create Predicate
+        let predicate = NSPredicate(format: "%K == %@", "region", menus[row])
+        fetchRequest.predicate = predicate
+        
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            print(results)
+            countrys = results as! [NSManagedObject]
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
     }
 
     // MARK: - Table view data source
@@ -32,7 +69,7 @@ class CountryTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arrCountrys[row].count
+        return countrys.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -42,7 +79,7 @@ class CountryTableViewController: UITableViewController {
 
         // Configure the cell...
         
-        let country = arrCountrys[row][indexPath.row]
+        let country = countrys[indexPath.row]
         
         cell.configureCell(country)
         cell.backgroundColor = UIColor.clearColor()
@@ -55,9 +92,12 @@ class CountryTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let country = arrCountrys[row][indexPath.row]
-        let countryName = country.name.replace(" ", replacement: "%20")
-        let link = "https://en.wikipedia.org/wiki/\(countryName)"
+        let country = countrys[indexPath.row]
+        let countryName = country.valueForKey("name") as! String
+        let shortCountryName = countryName.replace(" ", replacement: "%20")
+        
+        let link = "https://en.wikipedia.org/wiki/\(shortCountryName)"
+        
         print(link)
         let svc = SFSafariViewController(URL: NSURL(string: link)!)
         self.presentViewController(svc, animated: true, completion: nil)

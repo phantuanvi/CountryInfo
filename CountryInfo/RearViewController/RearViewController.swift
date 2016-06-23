@@ -29,9 +29,9 @@ class RearViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
-        if (Reachability.isConnectedToNetwork() == false) {
-            tableView.allowsSelection = false
-        }
+//        if (Reachability.isConnectedToNetwork() == false) {
+//            tableView.allowsSelection = false
+//        }
     }
     
 }
@@ -51,10 +51,7 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         cell.backgroundColor = UIColor.clearColor()
         
-        if Reachability.isConnectedToNetwork() == true {
-        
-            cell.textLabel?.text = menus[indexPath.row]
-        }
+        cell.textLabel?.text = menus[indexPath.row]
         
         return cell
     }
