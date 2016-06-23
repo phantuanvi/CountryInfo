@@ -12,7 +12,7 @@ import CoreData
 
 class CountryTableViewController: UITableViewController {
     
-    var countrys = [NSManagedObject]()
+    var countries = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class CountryTableViewController: UITableViewController {
         tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: menus[row])
         
         self.navigationItem.title = menus[row]
-        let leftButtonItem = UIBarButtonItem.init(title: "Menu", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
+        let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
         self.navigationItem.leftBarButtonItem = leftButtonItem
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -53,7 +53,7 @@ class CountryTableViewController: UITableViewController {
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             print(results)
-            countrys = results as! [NSManagedObject]
+            countries = results as! [NSManagedObject]
             
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -69,7 +69,7 @@ class CountryTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return countrys.count
+        return countries.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -79,7 +79,7 @@ class CountryTableViewController: UITableViewController {
 
         // Configure the cell...
         
-        let country = countrys[indexPath.row]
+        let country = countries[indexPath.row]
         
         cell.configureCell(country)
         cell.backgroundColor = UIColor.clearColor()
@@ -92,14 +92,22 @@ class CountryTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let country = countrys[indexPath.row]
-        let countryName = country.valueForKey("name") as! String
-        let shortCountryName = countryName.replace(" ", replacement: "%20")
-        
-        let link = "https://en.wikipedia.org/wiki/\(shortCountryName)"
-        
-        print(link)
-        let svc = SFSafariViewController(URL: NSURL(string: link)!)
-        self.presentViewController(svc, animated: true, completion: nil)
+        if Reachability.isConnectedToNetwork() == true {
+            let country = countries[indexPath.row]
+            let countryName = country.valueForKey("name") as! String
+            let shortCountryName = countryName.replace(" ", replacement: "%20")
+            
+            let link = "https://en.wikipedia.org/wiki/\(shortCountryName)"
+            
+            print(link)
+            let svc = SFSafariViewController(URL: NSURL(string: link)!)
+            self.presentViewController(svc, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(action)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let menus = ["Africa", "Asia", "Europe", "Oceania", "Americas"]
+let menus = ["All", "Africa", "Asia", "Europe", "Oceania", "Americas"]
 var row: Int = 0
 
 class RearViewController: UIViewController {
