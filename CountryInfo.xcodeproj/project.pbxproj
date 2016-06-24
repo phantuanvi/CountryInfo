@@ -69,13 +69,12 @@
 			isa = PBXGroup;
 			children = (
 				0CD14BAE1CF971B50071783B /* CountryInfo-Bridging-Header.h */,
-				0CD14BA91CF971540071783B /* SWRevealViewController.h */,
-				0CD14BAA1CF971540071783B /* SWRevealViewController.m */,
 				0C9B81DA1D1D09A800735AF0 /* Reachability.h */,
 				0C9B81DB1D1D09A800735AF0 /* Reachability.m */,
+				0CD14BA91CF971540071783B /* SWRevealViewController.h */,
+				0CD14BAA1CF971540071783B /* SWRevealViewController.m */,
 			);
-			name = ObjectiveC;
-			path = "Supporting Files";
+			path = ObjectiveC;
 			sourceTree = "<group>";
 		};
 		0C9B81D71D1D06E600735AF0 /* Utils */ = {
@@ -83,7 +82,7 @@
 			children = (
 				0C9B81D81D1D071000735AF0 /* Constants.swift */,
 			);
-			name = Utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		0CAB2E321CF9D9160010046A /* CountryCell */ = {
@@ -119,12 +118,12 @@
 				0CAB2E321CF9D9160010046A /* CountryCell */,
 				0CD14BA41CF93FFD0071783B /* CountryTableViewController */,
 				0CD14B951CF93A2E0071783B /* FrontViewController */,
-				0CD14B921CF939CE0071783B /* RearViewController */,
 				0CD14B901CF939BB0071783B /* Model */,
-				0CD14B8B1CF9398C0071783B /* Supporting Files */,
 				0C9B81D61D1D06C900735AF0 /* ObjectiveC */,
-				0CD14B751CF939550071783B /* AppDelegate.swift */,
+				0CD14B921CF939CE0071783B /* RearViewController */,
+				0CD14B8B1CF9398C0071783B /* Supporting Files */,
 				0C9B81D71D1D06E600735AF0 /* Utils */,
+				0CD14B751CF939550071783B /* AppDelegate.swift */,
 			);
 			path = CountryInfo;
 			sourceTree = "<group>";
