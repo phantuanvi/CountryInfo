@@ -21,6 +21,9 @@ class RearViewController: UIViewController {
         tableView.alwaysBounceVertical = false;
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: REGION[ROW])
         
+        tableView.backgroundColor = MAINCOLOR
+        tableView.separatorColor = CELLSEPARATOR
+        
         print("RearViewController did load")
     }
     
@@ -41,7 +44,7 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         cell.backgroundColor = UIColor.clearColor()
         
-        cell.textLabel?.textColor = REGIONCOLOR
+        cell.textLabel?.textColor = BUTTONCOLOR
         cell.textLabel?.text = REGION[indexPath.row]
         
         return cell

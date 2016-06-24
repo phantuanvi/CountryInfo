@@ -32,6 +32,8 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FrontViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
         reachabilityStatusChanged()
         
+        tableView.backgroundColor = MAINCOLOR
+        tableView.separatorColor = CELLSEPARATOR
         tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: REGION[ROW])
         
         let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))

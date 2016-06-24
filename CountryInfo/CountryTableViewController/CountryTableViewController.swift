@@ -36,11 +36,13 @@ class CountryTableViewController: UITableViewController {
             }
         }
 
+        tableView.backgroundColor = MAINCOLOR
+        tableView.separatorColor = CELLSEPARATOR
         tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: REGION[ROW])
         
         self.navigationItem.title = REGION[ROW]
         let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
-        leftButtonItem.tintColor = UIColor(red: 255.0/255.0, green: 127.0/255.0, blue: 0/255.0, alpha: 1)
+        leftButtonItem.tintColor = BUTTONCOLOR
         self.navigationItem.leftBarButtonItem = leftButtonItem
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
