@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rearNavigationController = UINavigationController.init(rootViewController: rearViewController)
         
         let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
-        UINavigationBar.appearance().tintColor = MAINCOLOR
+        UINavigationBar.appearance().barTintColor = MAINCOLOR
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: BUTTONCOLOR]
         
         let standardDefaults = NSUserDefaults.standardUserDefaults()
         let appDefaults = ["FirstTime": true]

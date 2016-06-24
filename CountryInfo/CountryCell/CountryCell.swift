@@ -24,6 +24,10 @@ class CountryCell: UITableViewCell {
         let areaString = country.valueForKey("area") as! String
         self.area.text = "\(areaString) \u{33A2}"
         
+        self.name.textColor = BUTTONCOLOR
+        self.population.textColor = BUTTONCOLOR
+        self.area.textColor = BUTTONCOLOR
+        
         let urlString = country.valueForKey("flagUrl") as! String
         let url = NSURL(string: urlString)!
 

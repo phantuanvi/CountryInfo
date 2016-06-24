@@ -41,6 +41,7 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         cell.backgroundColor = UIColor.clearColor()
         
+        cell.textLabel?.textColor = REGIONCOLOR
         cell.textLabel?.text = REGION[indexPath.row]
         
         return cell
