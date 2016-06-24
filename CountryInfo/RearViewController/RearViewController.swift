@@ -8,9 +8,6 @@
 
 import UIKit
 
-let menus = ["All", "Africa", "Asia", "Europe", "Oceania", "Americas"]
-var row: Int = 0
-
 class RearViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,16 +19,9 @@ class RearViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false;
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: menus[row])
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: REGION[ROW])
         
         print("RearViewController did load")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-//        if (Reachability.isConnectedToNetwork() == false) {
-//            tableView.allowsSelection = false
-//        }
     }
     
 }
@@ -42,16 +32,16 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menus.count
+        return REGION.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellIdentifier = menus[row]
+        let cellIdentifier = REGION[ROW]
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         cell.backgroundColor = UIColor.clearColor()
         
-        cell.textLabel?.text = menus[indexPath.row]
+        cell.textLabel?.text = REGION[indexPath.row]
         
         return cell
     }
@@ -75,8 +65,8 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        row = indexPath.row
-        print("row: \(row)")
+        ROW = indexPath.row
+        print("row: \(ROW)")
         return indexPath
     }
 }

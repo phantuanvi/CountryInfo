@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		0C903C511D1A97F6008C2B02 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903C4F1D1A97F6008C2B02 /* Country+CoreDataProperties.swift */; };
 		0C903C521D1A97F6008C2B02 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903C501D1A97F6008C2B02 /* Country.swift */; };
+		0C9B81D91D1D071000735AF0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9B81D81D1D071000735AF0 /* Constants.swift */; };
+		0C9B81DC1D1D09A800735AF0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9B81DB1D1D09A800735AF0 /* Reachability.m */; };
 		0CAB2E351CF9D9EF0010046A /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB2E331CF9D9EF0010046A /* CountryCell.swift */; };
 		0CAB2E361CF9D9EF0010046A /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CAB2E341CF9D9EF0010046A /* CountryCell.xib */; };
-		0CAD41C01D1A219100C0F165 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAD41BF1D1A219100C0F165 /* Reachability.swift */; };
 		0CB365791CF9C56300315104 /* FrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB365771CF9C56300315104 /* FrontViewController.swift */; };
 		0CB3657A1CF9C56300315104 /* FrontViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB365781CF9C56300315104 /* FrontViewController.xib */; };
 		0CB3657D1CF9C61700315104 /* RearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3657B1CF9C61700315104 /* RearViewController.swift */; };
@@ -19,7 +20,6 @@
 		0CD14B761CF939550071783B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B751CF939550071783B /* AppDelegate.swift */; };
 		0CD14B7E1CF939550071783B /* CountryInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14B7C1CF939550071783B /* CountryInfo.xcdatamodeld */; };
 		0CD14B801CF939560071783B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B7F1CF939560071783B /* Assets.xcassets */; };
-		0CD14B831CF939560071783B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14B811CF939560071783B /* LaunchScreen.storyboard */; };
 		0CD14BA71CF940290071783B /* CountryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14BA51CF940290071783B /* CountryTableViewController.swift */; };
 		0CD14BA81CF940290071783B /* CountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD14BA61CF940290071783B /* CountryTableViewController.xib */; };
 		0CD14BAB1CF971540071783B /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD14BAA1CF971540071783B /* SWRevealViewController.m */; };
@@ -30,9 +30,11 @@
 		0B1DD60A94A53436E4A84AB9 /* Pods-CountryInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInfo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CountryInfo/Pods-CountryInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		0C903C4F1D1A97F6008C2B02 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0C903C501D1A97F6008C2B02 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		0C9B81D81D1D071000735AF0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0C9B81DA1D1D09A800735AF0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0C9B81DB1D1D09A800735AF0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0CAB2E331CF9D9EF0010046A /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		0CAB2E341CF9D9EF0010046A /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
-		0CAD41BF1D1A219100C0F165 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0CB365771CF9C56300315104 /* FrontViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontViewController.swift; sourceTree = "<group>"; };
 		0CB365781CF9C56300315104 /* FrontViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontViewController.xib; sourceTree = "<group>"; };
 		0CB3657B1CF9C61700315104 /* RearViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RearViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +43,6 @@
 		0CD14B751CF939550071783B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CD14B7D1CF939550071783B /* CountryInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CountryInfo.xcdatamodel; sourceTree = "<group>"; };
 		0CD14B7F1CF939560071783B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0CD14B821CF939560071783B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CD14B841CF939560071783B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CD14BA51CF940290071783B /* CountryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryTableViewController.swift; sourceTree = "<group>"; };
 		0CD14BA61CF940290071783B /* CountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryTableViewController.xib; sourceTree = "<group>"; };
@@ -64,6 +65,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C9B81D61D1D06C900735AF0 /* ObjectiveC */ = {
+			isa = PBXGroup;
+			children = (
+				0CD14BAE1CF971B50071783B /* CountryInfo-Bridging-Header.h */,
+				0CD14BA91CF971540071783B /* SWRevealViewController.h */,
+				0CD14BAA1CF971540071783B /* SWRevealViewController.m */,
+				0C9B81DA1D1D09A800735AF0 /* Reachability.h */,
+				0C9B81DB1D1D09A800735AF0 /* Reachability.m */,
+			);
+			name = ObjectiveC;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C9B81D71D1D06E600735AF0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0C9B81D81D1D071000735AF0 /* Constants.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		0CAB2E321CF9D9160010046A /* CountryCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +122,9 @@
 				0CD14B921CF939CE0071783B /* RearViewController */,
 				0CD14B901CF939BB0071783B /* Model */,
 				0CD14B8B1CF9398C0071783B /* Supporting Files */,
+				0C9B81D61D1D06C900735AF0 /* ObjectiveC */,
 				0CD14B751CF939550071783B /* AppDelegate.swift */,
-				0CAD41BF1D1A219100C0F165 /* Reachability.swift */,
+				0C9B81D71D1D06E600735AF0 /* Utils */,
 			);
 			path = CountryInfo;
 			sourceTree = "<group>";
@@ -110,11 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				0CD14B7F1CF939560071783B /* Assets.xcassets */,
-				0CD14BAE1CF971B50071783B /* CountryInfo-Bridging-Header.h */,
 				0CD14B841CF939560071783B /* Info.plist */,
-				0CD14B811CF939560071783B /* LaunchScreen.storyboard */,
-				0CD14BA91CF971540071783B /* SWRevealViewController.h */,
-				0CD14BAA1CF971540071783B /* SWRevealViewController.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -239,7 +258,6 @@
 				0CD14BA81CF940290071783B /* CountryTableViewController.xib in Resources */,
 				0CB3657A1CF9C56300315104 /* FrontViewController.xib in Resources */,
 				0CB3657E1CF9C61700315104 /* RearViewController.xib in Resources */,
-				0CD14B831CF939560071783B /* LaunchScreen.storyboard in Resources */,
 				0CD14B801CF939560071783B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,31 +318,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CAB2E351CF9D9EF0010046A /* CountryCell.swift in Sources */,
+				0C9B81D91D1D071000735AF0 /* Constants.swift in Sources */,
 				0CB3657D1CF9C61700315104 /* RearViewController.swift in Sources */,
 				0CB365791CF9C56300315104 /* FrontViewController.swift in Sources */,
 				0CD14B761CF939550071783B /* AppDelegate.swift in Sources */,
-				0CAD41C01D1A219100C0F165 /* Reachability.swift in Sources */,
 				0CD14B7E1CF939550071783B /* CountryInfo.xcdatamodeld in Sources */,
 				0CD14BA71CF940290071783B /* CountryTableViewController.swift in Sources */,
 				0CD14BAB1CF971540071783B /* SWRevealViewController.m in Sources */,
 				0C903C521D1A97F6008C2B02 /* Country.swift in Sources */,
+				0C9B81DC1D1D09A800735AF0 /* Reachability.m in Sources */,
 				0C903C511D1A97F6008C2B02 /* Country+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0CD14B811CF939560071783B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0CD14B821CF939560071783B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			path = .;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0CD14B851CF939560071783B /* Debug */ = {
@@ -415,6 +422,7 @@
 			baseConfigurationReference = 0B1DD60A94A53436E4A84AB9 /* Pods-CountryInfo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "CountryInfo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -430,6 +438,7 @@
 			baseConfigurationReference = 280ADDFB699840FEF6022EE0 /* Pods-CountryInfo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "CountryInfo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

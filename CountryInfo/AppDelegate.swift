@@ -9,11 +9,16 @@
 import UIKit
 import CoreData
 
+var reachability: Reachability?
+var reachabilityStatus = " "
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var internetCheck: Reachability?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,15 +31,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rearNavigationController = UINavigationController.init(rootViewController: rearViewController)
         
         let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
+        UINavigationBar.appearance().tintColor = MAINCOLOR
         
         let standardDefaults = NSUserDefaults.standardUserDefaults()
         let appDefaults = ["FirstTime": true]
         standardDefaults.registerDefaults(appDefaults)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+        internetCheck = Reachability.reachabilityForInternetConnection()
+        internetCheck?.startNotifier()
+        statusChangedWithReachability(internetCheck!)
+        
         self.window?.rootViewController = revealController
         self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func reachabilityChanged(notification: NSNotification) {
+        reachability = notification.object as? Reachability
+        statusChangedWithReachability(reachability!)
+    }
+    
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        
+        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        
+        switch networkStatus.rawValue {
+        case NotReachable.rawValue:
+            reachabilityStatus = NOACCESS
+        case ReachableViaWiFi.rawValue:
+            reachabilityStatus = WIFI
+        case ReachableViaWWAN.rawValue:
+            reachabilityStatus = WWAN
+        default:
+            return
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("ReachStatusChanged", object: nil)
     }
 
     func applicationWillResignActive(application: UIApplication) {

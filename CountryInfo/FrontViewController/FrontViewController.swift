@@ -29,29 +29,17 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         
         print("frontViewController View Did Load")
         
-        let standardDefaults = NSUserDefaults.standardUserDefaults()
-        let firstTime = standardDefaults.boolForKey("FirstTime")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FrontViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
+        reachabilityStatusChanged()
         
-        if firstTime {
-            if (Reachability.isConnectedToNetwork() == true) {
-                getDataFromLink()
-                standardDefaults.setBool(false, forKey: "FirstTime")
-                standardDefaults.synchronize()
-            } else {
-                let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
-                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                alertController.addAction(action)
-                self.presentViewController(alertController, animated: true, completion: nil)
-            }
-        }
-        
-        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: menus[row])
+        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: REGION[ROW])
         
         let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
         self.navigationItem.leftBarButtonItem = leftButtonItem
+        leftButtonItem.tintColor = BUTTONCOLOR
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        self.navigationItem.title = menus[0]
+        self.navigationItem.title = REGION[ROW]
         
         // Initialize and configuration to the search controller
         searchController = UISearchController(searchResultsController: nil)
@@ -59,7 +47,7 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search here..."
         searchController.searchBar.delegate = self
-        searchController.searchBar.barTintColor = UIColor(red: 226.0/255.0, green: 236.0/255.0, blue: 136.0/255.0, alpha: 1)
+        searchController.searchBar.barTintColor = MAINCOLOR
         searchController.searchBar.sizeToFit()
         
         tableView.tableHeaderView = searchController.searchBar
@@ -68,7 +56,7 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchData()
+        fetchfromCoreData()
     }
 
     // MARK: UITableViewDelegate, DataSource
@@ -86,7 +74,7 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellIdentifier = menus[row]
+        let cellIdentifier = REGION[ROW]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CountryCell
         
         // Configure the cell...
@@ -109,23 +97,29 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if Reachability.isConnectedToNetwork() {
+        if reachabilityStatus != NOACCESS {
             let country = countries[indexPath.row]
             let countryName = country.valueForKey("name") as! String
             let shortCountryName = countryName.replace(" ", replacement: "%20")
             
             let link = "https://en.wikipedia.org/wiki/\(shortCountryName)"
-            
             print(link)
-            let svc = SFSafariViewController(URL: NSURL(string: link)!)
-            self.presentViewController(svc, animated: true, completion: nil)
+            let url = NSURL(string: link)
+            if (url != nil) {
+                let svc = SFSafariViewController(URL: url!)
+                self.presentViewController(svc, animated: true, completion: nil)
+            }
         } else {
             let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
             alertController.addAction(action)
             self.presentViewController(alertController, animated: true, completion: nil)
+            
         }
+        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
     
     // MARK: UISearchBarDelegate
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -168,7 +162,7 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
     // MARK: my func
     func getDataFromLink() {
         
-        if Reachability.isConnectedToNetwork() == true {
+        if reachabilityStatus != NOACCESS {
             SVProgressHUD.showWithStatus("Please wait!")
             
             Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
@@ -221,13 +215,15 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         
         print("parse json and save to CoreData done !")
         
+        fetchfromCoreData()
         SVProgressHUD.showSuccessWithStatus("Complete")
         SVProgressHUD.dismissWithDelay(0.5)
-        fetchData()
+        
         self.tableView.reloadData()
     }
     
-    func fetchData() {
+    func fetchfromCoreData() {
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Country")
@@ -239,6 +235,41 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
+    }
+    
+    func reachabilityStatusChanged() {
+        
+        let standardDefaults = NSUserDefaults.standardUserDefaults()
+        let firstTime = standardDefaults.boolForKey("FirstTime")
+        
+        if ((firstTime) && (reachabilityStatus != NOACCESS)){
+            
+            getDataFromLink()
+            standardDefaults.setBool(false, forKey: "FirstTime")
+            standardDefaults.synchronize()
+        }
+        
+        switch reachabilityStatus {
+        case NOACCESS:
+            
+            // move back to Main Queue
+            dispatch_async(dispatch_get_main_queue(), { 
+                let alert = UIAlertController(title: "No Internet Access", message: "Please make sure you are connected to the Internet", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+                    print("OK")
+                })
+                
+                alert.addAction(okAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+        default:
+            fetchfromCoreData()
+        }
+    }
+    
+    // Is called just as the object is about to be deallocated
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
     }
 }
 
