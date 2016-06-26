@@ -21,20 +21,8 @@ class CountryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let standardDefaults = NSUserDefaults.standardUserDefaults()
-        let firstTime = standardDefaults.boolForKey("FirstTime")
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FrontViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
         reachabilityStatusChanged()
-        
-        if firstTime {
-            if (reachabilityStatus != NOACCESS) {
-                let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
-                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                alertController.addAction(action)
-                self.presentViewController(alertController, animated: true, completion: nil)
-            }
-        }
 
         tableView.backgroundColor = MAINCOLOR
         tableView.separatorColor = CELLSEPARATOR

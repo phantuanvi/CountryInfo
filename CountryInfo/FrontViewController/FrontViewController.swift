@@ -100,7 +100,14 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if reachabilityStatus != NOACCESS {
-            let country = countries[indexPath.row]
+            
+            var country: NSManagedObject!
+            if shouldShowSearchResults {
+                country = filteredArray[indexPath.row]
+            } else {
+                country = countries[indexPath.row]
+            }
+            
             let countryName = country.valueForKey("name") as! String
             let shortCountryName = countryName.replace(" ", replacement: "%20")
             
