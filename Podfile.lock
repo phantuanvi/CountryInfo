@@ -1,21 +1,31 @@
 PODS:
-  - Alamofire (3.4.0)
-  - Kingfisher (2.4.1)
+  - Alamofire (4.3.0)
+  - Kingfisher (3.0.1)
   - SVProgressHUD (2.0.3)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
-  - Alamofire
-  - Kingfisher
+  - Alamofire (~> 4.3)
+  - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
   - SVProgressHUD
-  - SwiftyJSON
+  - SwiftyJSON (~> 3.0.0)
+
+EXTERNAL SOURCES:
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 3.0.1
+
+CHECKOUT OPTIONS:
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 3.0.1
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 97cbacf157bcb54688ebbc424f539185430f4354
+PODFILE CHECKSUM: a80d7c7b32abebc110b4377fda5446ed7a311fbc
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.2.0

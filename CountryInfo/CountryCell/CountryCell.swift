@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Alamofire
 import Kingfisher
+import Alamofire
 import CoreData
 
 class CountryCell: UITableViewCell {
@@ -18,21 +18,21 @@ class CountryCell: UITableViewCell {
     @IBOutlet weak var population: UILabel!
     @IBOutlet weak var area: UILabel!
     
-    func configureCell(country: NSManagedObject) {
-        self.name.text = country.valueForKey("name") as? String
-        self.population.text = country.valueForKey("population") as? String
-        let areaString = country.valueForKey("area") as! String
+    func configureCell(_ country: NSManagedObject) {
+        self.name.text = country.value(forKey: "name") as? String
+        self.population.text = country.value(forKey: "population") as? String
+        let areaString = country.value(forKey: "area") as! String
         self.area.text = "\(areaString) \u{33A2}"
         
         self.name.textColor = BUTTONCOLOR
         self.population.textColor = BUTTONCOLOR
         self.area.textColor = BUTTONCOLOR
         
-        let urlString = country.valueForKey("flagUrl") as! String
-        let url = NSURL(string: urlString)!
+        let urlString = country.value(forKey: "flagUrl") as! String
+        let url = URL(string: urlString)!
 
         print(url)
-        self.flagImg.kf_setImageWithURL(url, placeholderImage: nil)
+        self.flagImg.kf_setImage(with: url)
     }
     
 }

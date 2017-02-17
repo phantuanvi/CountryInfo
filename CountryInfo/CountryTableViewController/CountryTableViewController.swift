@@ -21,22 +21,22 @@ class CountryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FrontViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FrontViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
         reachabilityStatusChanged()
 
         tableView.backgroundColor = MAINCOLOR
         tableView.separatorColor = CELLSEPARATOR
-        tableView.registerNib(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: REGION[ROW])
+        tableView.register(UINib(nibName: "CountryCell", bundle: nil), forCellReuseIdentifier: REGION[ROW])
         
         self.navigationItem.title = REGION[ROW]
-        let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.Done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
+        let leftButtonItem = UIBarButtonItem.init(title: "Region", style: UIBarButtonItemStyle.done, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
         leftButtonItem.tintColor = BUTTONCOLOR
         self.navigationItem.leftBarButtonItem = leftButtonItem
         
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         fetchfromCoreData()
@@ -44,56 +44,56 @@ class CountryTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return countries.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = REGION[ROW]
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CountryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CountryCell
 
         // Configure the cell...
         
         let country = countries[indexPath.row]
         
         cell.configureCell(country)
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if reachabilityStatus != NOACCESS {
             let country = countries[indexPath.row]
-            let countryName = country.valueForKey("name") as! String
+            let countryName = country.value(forKey: "name") as! String
             let shortCountryName = countryName.replace(" ", replacement: "%20")
             
             let link = "https://en.wikipedia.org/wiki/\(shortCountryName)"
             print(link)
-            let url = NSURL(string: link)
+            let url = URL(string: link)
             if (url != nil) {
-                let svc = SFSafariViewController(URL: url!)
-                self.presentViewController(svc, animated: true, completion: nil)
+                let svc = SFSafariViewController(url: url!)
+                self.present(svc, animated: true, completion: nil)
             }
         } else {
-            let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.Alert)
-            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let alertController = UIAlertController(title: "No Internet Connnection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             alertController.addAction(action)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
         
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: my func
@@ -101,21 +101,21 @@ class CountryTableViewController: UITableViewController {
     func getDataFromLink() {
         
         if reachabilityStatus != NOACCESS {
-            SVProgressHUD.showWithStatus("Please wait!")
+            SVProgressHUD.show(withStatus: "Please wait!")
             
-            Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all").responseJSON { response in
+            Alamofire.request("https://restcountries.eu/rest/v1/all").responseJSON(completionHandler: { (response) in
                 switch response.result {
-                case .Success:
+                case .success:
                     
                     if let value = response.result.value {
                         self.arrJSON = JSON(value)
                     }
                     self.parseJson()
                     
-                case .Failure(let error):
-                    print(error.description)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            }
+            })
         }
         
     }
@@ -126,14 +126,14 @@ class CountryTableViewController: UITableViewController {
             var dict = arrJSON[i]
             
             // Save data to CoreData
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
-            let entity = NSEntityDescription.entityForName("Country", inManagedObjectContext: managedContext)
-            let country = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            let entity = NSEntityDescription.entity(forEntityName: "Country", in: managedContext)
+            let country = NSManagedObject(entity: entity!, insertInto: managedContext)
             
             country.setValue(dict["name"].stringValue, forKey: "name")
             
-            let alphaCode = dict["alpha2Code"].stringValue.lowercaseString
+            let alphaCode = dict["alpha2Code"].stringValue.lowercased()
             country.setValue(alphaCode, forKey: "alpha2Code")
             country.setValue(dict["population"].stringValue, forKey: "population")
             country.setValue(dict["area"].stringValue, forKey: "area")
@@ -154,21 +154,21 @@ class CountryTableViewController: UITableViewController {
         print("parse json and save to CoreData done !")
         
         fetchfromCoreData()
-        SVProgressHUD.showSuccessWithStatus("Complete")
-        SVProgressHUD.dismissWithDelay(0.5)
+        SVProgressHUD.showSuccess(withStatus: "Complete")
+        SVProgressHUD.dismiss(withDelay: 0.5)
         
         self.tableView.reloadData()
     }
     
     func reachabilityStatusChanged() {
         
-        let standardDefaults = NSUserDefaults.standardUserDefaults()
-        let firstTime = standardDefaults.boolForKey("FirstTime")
+        let standardDefaults = UserDefaults.standard
+        let firstTime = standardDefaults.bool(forKey: "FirstTime")
         
         if ((firstTime) && (reachabilityStatus != NOACCESS)){
             
             getDataFromLink()
-            standardDefaults.setBool(false, forKey: "FirstTime")
+            standardDefaults.set(false, forKey: "FirstTime")
             standardDefaults.synchronize()
         }
         
@@ -176,14 +176,14 @@ class CountryTableViewController: UITableViewController {
         case NOACCESS:
             
             // move back to Main Queue
-            dispatch_async(dispatch_get_main_queue(), {
-                let alert = UIAlertController(title: "No Internet Access", message: "Please make sure you are connected to the Internet", preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
+                let alert = UIAlertController(title: "No Internet Access", message: "Please make sure you are connected to the Internet", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                     print("OK")
                 })
                 
                 alert.addAction(okAction)
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             })
         default:
             fetchfromCoreData()
@@ -191,9 +191,9 @@ class CountryTableViewController: UITableViewController {
     }
     
     func fetchfromCoreData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Country")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Country")
         
         // Create Predicate
         let predicate = NSPredicate(format: "%K == %@", "region", REGION[ROW])
@@ -201,7 +201,7 @@ class CountryTableViewController: UITableViewController {
         
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             print(results)
             countries = results as! [NSManagedObject]
             
@@ -212,7 +212,7 @@ class CountryTableViewController: UITableViewController {
     
     // Is called just as the object is about to be deallocated
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
     }
     
 }

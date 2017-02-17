@@ -19,7 +19,7 @@ class RearViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false;
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: REGION[ROW])
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: REGION[ROW])
         
         tableView.backgroundColor = MAINCOLOR
         tableView.separatorColor = CELLSEPARATOR
@@ -30,19 +30,19 @@ class RearViewController: UIViewController {
 }
 
 extension RearViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return REGION.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = REGION[ROW]
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
-        cell.backgroundColor = UIColor.clearColor()
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        cell.backgroundColor = UIColor.clear
         
         cell.textLabel?.textColor = BUTTONCOLOR
         cell.textLabel?.text = REGION[indexPath.row]
@@ -50,7 +50,7 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var nextViewController: UIViewController!
         
@@ -68,7 +68,7 @@ extension RearViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         ROW = indexPath.row
         print("row: \(ROW)")
         return indexPath
