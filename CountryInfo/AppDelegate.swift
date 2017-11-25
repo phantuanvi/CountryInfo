@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let revealController = SWRevealViewController.init(rearViewController: rearNavigationController, frontViewController: frontNavigationController)
         UINavigationBar.appearance().barTintColor = MAINCOLOR
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: BUTTONCOLOR]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: BUTTONCOLOR]
         
         let standardDefaults = UserDefaults.standard
         let appDefaults = ["FirstTime": true]
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func reachabilityChanged(_ notification: Notification) {
+    @objc func reachabilityChanged(_ notification: Notification) {
         reachability = notification.object as? Reachability
         statusChangedWithReachability(reachability!)
     }

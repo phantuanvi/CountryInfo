@@ -247,7 +247,7 @@ class FrontViewController: UITableViewController, UISearchResultsUpdating, UISea
         }
     }
     
-    func reachabilityStatusChanged() {
+    @objc func reachabilityStatusChanged() {
         
         let standardDefaults = UserDefaults.standard
         let firstTime = standardDefaults.bool(forKey: "FirstTime")
